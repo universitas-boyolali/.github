@@ -1,0 +1,34 @@
+name: Update Copyright Year
+
+on:
+  schedule:
+    - cron: '0 0 1 1 *'
+  workflow_dispatch:
+
+jobs:
+  update-year:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Update Year in README
+        run: |
+          # Ambil tahun sekarang
+          YEAR=$(date +'%Y')
+          
+          # Pakai sed untuk cari teks antara marker dan ganti tahunnya
+          sed -i "s/&copy; [0-9]\{4\}/\&copy; $YEAR/g" profile/README.md
+          
+      - name: Commit and Push
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add profile/README.md
+          # Cek kalau ada perubahan baru di-commit
+          if ! git diff --quiet; then
+            git commit -m "chore: update copyright year to $(date +'%Y')"
+            git push
+          fi
