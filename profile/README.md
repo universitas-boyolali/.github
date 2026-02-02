@@ -72,4 +72,4 @@ Ingin kode kamu masuk ke repositori kampus? Ikuti langkah ini:
 
 <div align="center">
   <small>&copy; 2026 Universitas Boyolali. Dikelola oleh Tim IT & Komunitas Mahasiswa.</small>
-</div>
+  </div>
